@@ -12,13 +12,13 @@ export const TopSearch = () => {
   };
 
   return (
-    <div className="top-search w-1/2">
+    <div className="top-search w-full md:w-1/2">
       <div className="relative flex items-center">
         <input
           type="search"
           name="search"
           id="search"
-          className="block w-full h-12 rounded-md border-0 py-1.5 pl-3 pr-14 text-gray-900 ring-inset placeholder:text-gray-400 focus:ring-2 focus-visible:outline-none focus:ring-mePink focus:transition-ring ease-in-out duration-150 text-lg search-cancel-button:appearance-none"
+          className="block w-full h-12 rounded-md border-0 py-1.5 pl-3 pr-14 text-gray-900 ring-inset placeholder:text-gray-400 focus:ring-2 focus-visible:outline-none focus:ring-meLightest focus:transition-ring ease-in-out duration-150 text-lg search-cancel-button:appearance-none"
           onFocus={handleFocus}
           onBlur={handleFocus}
         />
@@ -26,7 +26,7 @@ export const TopSearch = () => {
           icon={faSearch}
           size={'lg'}
           className={`absolute my-auto inset-y-0 right-2 flex py-1.5 pr-1.5 self-center transition ease-in-out duration-150 ${
-            isFocused ? 'text-mePink' : 'text-gray-200'
+            isFocused ? 'text-meLightest' : 'text-gray-200'
           }`}
         />
       </div>

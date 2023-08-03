@@ -11,22 +11,22 @@ export const NftCard = ({ nft }: NftCardProps) => {
   return (
     <div className="nft-card w-full relative">
       <Image
-        width={220}
-        height={220}
+        width={400}
+        height={400}
         src={nft.image}
         alt={nft.title}
-        className="w-full h-full static"
+        className="w-full h-full static rounded-md"
       />
-      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-header">
-        <div className="my-auto p-2 h-1/3 flex text-md lg:text-xs">
-          <p className="nft-title shadow">{nft.title}</p>
-          <p className="flex nft-price shadow ml-auto">
+      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-meDarkest rounded-b-sm">
+        <div className="my-auto p-2 h-10 flex text-md lg:text-xs">
+          <p className="nft-title shadow leading-6">{nft.title}</p>
+          <p className="flex nft-price shadow ml-auto leading-6">
             <Image
               src={'/static/icons/solanaIcon.png'}
               width={15}
               height={13}
               alt="Solana Icon"
-              className="w-auto h-4 mt-1 mr-1 lg:h-3 lg:mt-[2px] lg:mr-0.5"
+              className="w-auto h-4 my-auto mr-1 lg:h-3 lg:mr-0.5"
             />
             <span>{nft.price}</span>
           </p>

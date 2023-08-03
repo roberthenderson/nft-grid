@@ -19,6 +19,7 @@ export const NftGrid = () => {
   const [allNfts, setAllNfts] = useState<GridNft[]>([]);
 
   const fetchNfts = useCallback(async () => {
+    console.log('fetching nfts...');
     const endpoint =
       'https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0';
     const response = await fetch(endpoint).then((res) => res.json());
@@ -34,10 +35,13 @@ export const NftGrid = () => {
   }, []);
 
   useEffect(() => {
-    fetchNfts();
-  }, [fetchNfts]);
+    if (allNfts.length === 0) {
+      fetchNfts();
+    }
+  }, [fetchNfts, allNfts]);
+
   return (
-    <section className="nft-grid grid mt-4 mx-auto grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4 max-w-screen-xl">
+    <section className="nft-grid grid mt-8 mx-auto grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4 max-w-screen-xl">
       {allNfts.map((nft) => (
         <NftCard nft={nft} key={nft.id} />
       ))}
