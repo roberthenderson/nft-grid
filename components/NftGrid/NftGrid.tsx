@@ -1,28 +1,25 @@
 'use client';
 
-import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { NftCard } from '../NftCard/NftCard';
+import { allNftsAtom, queryAllNftsSelector } from '@/app/recoil/allNftsAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { searchTermAtom } from '@/app/recoil/searchTermAtom';
+import { GET_LISTED_NFTS_BY_COLLECTION_SYMBOL_ENDPOINT } from '@/utils/contants';
 
 interface MeNft {
   [key: string]: string;
 }
 
-export interface GridNft {
-  id: string;
-  title: string;
-  image: string;
-  price: string;
-}
-
 export const NftGrid = () => {
-  const [allNfts, setAllNfts] = useState<GridNft[]>([]);
+  const [allNfts, setAllNfts] = useRecoilState(allNftsAtom);
+  const searchTerm = useRecoilValue(searchTermAtom);
+  const filteredNfts = useRecoilValue(queryAllNftsSelector(searchTerm));
 
   const fetchNfts = useCallback(async () => {
-    console.log('fetching nfts...');
-    const endpoint =
-      'https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0';
-    const response = await fetch(endpoint).then((res) => res.json());
+    const response = await fetch(
+      GET_LISTED_NFTS_BY_COLLECTION_SYMBOL_ENDPOINT
+    ).then((res) => res.json());
     const nfts = response.results.map((nft: MeNft) => {
       return {
         id: nft.id,
@@ -32,7 +29,7 @@ export const NftGrid = () => {
       };
     });
     setAllNfts((existingNfts) => [...existingNfts, ...nfts]);
-  }, []);
+  }, [setAllNfts]);
 
   useEffect(() => {
     if (allNfts.length === 0) {
@@ -42,7 +39,7 @@ export const NftGrid = () => {
 
   return (
     <section className="nft-grid grid mt-8 mx-auto grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4 max-w-screen-xl">
-      {allNfts.map((nft) => (
+      {filteredNfts.map((nft) => (
         <NftCard nft={nft} key={nft.id} />
       ))}
     </section>

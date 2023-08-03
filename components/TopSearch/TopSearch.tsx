@@ -1,15 +1,31 @@
 'use client';
 
+import { searchTermAtom } from '@/app/recoil/searchTermAtom';
+import { debounce } from '@/utils/debounce/debounce';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FocusEventHandler, useState } from 'react';
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  FocusEventHandler,
+  useState,
+} from 'react';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 export const TopSearch = () => {
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const setSearchTerm = useSetRecoilState(searchTermAtom);
 
   const handleFocus: FocusEventHandler<HTMLInputElement> = (event) => {
     setIsFocused(event.type === 'blur' ? false : true);
   };
+
+  const handleSearch: ChangeEventHandler<HTMLInputElement> = debounce(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setSearchTerm(event.target.value);
+    },
+    250
+  );
 
   return (
     <div className="top-search w-full md:w-1/2">
@@ -18,9 +34,11 @@ export const TopSearch = () => {
           type="search"
           name="search"
           id="search"
+          placeholder="Search for an NFT"
           className="block w-full h-12 rounded-md border-0 py-1.5 pl-3 pr-14 text-gray-900 ring-inset placeholder:text-gray-400 focus:ring-2 focus-visible:outline-none focus:ring-meLightest focus:transition-ring ease-in-out duration-150 text-lg search-cancel-button:appearance-none"
           onFocus={handleFocus}
           onBlur={handleFocus}
+          onChange={handleSearch}
         />
         <FontAwesomeIcon
           icon={faSearch}

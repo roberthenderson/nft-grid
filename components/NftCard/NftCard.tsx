@@ -1,7 +1,7 @@
 'use client';
 
+import { GridNft } from '@/app/recoil/allNftsAtom';
 import Image from 'next/image';
-import { GridNft } from '../NftGrid/NftGrid';
 
 interface NftCardProps {
   nft: GridNft;
