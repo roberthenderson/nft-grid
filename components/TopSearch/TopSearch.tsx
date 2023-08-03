@@ -1,19 +1,35 @@
-export default function TopSearch() {
+'use client';
+
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FocusEventHandler, useState } from 'react';
+
+export const TopSearch = () => {
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus: FocusEventHandler<HTMLInputElement> = (event) => {
+    setIsFocused(event.type === 'blur' ? false : true);
+  };
+
   return (
-    <div className="top-search justify-self-center w-1/2">
+    <div className="top-search w-1/2">
       <div className="relative flex items-center">
         <input
-          type="text"
+          type="search"
           name="search"
           id="search"
-          className="block w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          className="block w-full h-12 rounded-md border-0 py-1.5 pl-3 pr-14 text-gray-900 ring-inset placeholder:text-gray-400 focus:ring-2 focus-visible:outline-none focus:ring-mePink focus:transition-ring ease-in-out duration-150 text-lg search-cancel-button:appearance-none"
+          onFocus={handleFocus}
+          onBlur={handleFocus}
         />
-        <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
-          <kbd className="inline-flex items-center rounded border border-gray-200 px-1 font-sans text-xs text-gray-400">
-            ⌘K
-          </kbd>
-        </div>
+        <FontAwesomeIcon
+          icon={faSearch}
+          size={'lg'}
+          className={`absolute my-auto inset-y-0 right-2 flex py-1.5 pr-1.5 self-center transition ease-in-out duration-150 ${
+            isFocused ? 'text-mePink' : 'text-gray-200'
+          }`}
+        />
       </div>
     </div>
   );
-}
+};
