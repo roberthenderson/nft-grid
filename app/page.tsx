@@ -7,7 +7,7 @@ import { RecoilRoot } from 'recoil';
 
 const queryClient = new QueryClient();
 
-export const Home = () => {
+export default function Home() {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
@@ -20,4 +20,4 @@ export const Home = () => {
       </RecoilRoot>
     </QueryClientProvider>
   );
-};
+}
