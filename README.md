@@ -27,6 +27,7 @@ There are jest tests included with each component. To run the tests:
 
 ```bash
 yarn test
+# Note: you may need to press `a` to run the tests
 ```
 
 ## Overview
