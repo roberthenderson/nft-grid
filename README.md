@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 Hi, this is Robert Henderson's Magic Eden take home project. You are accessing this repo from a zip file, downloaded from my private repo on [GitHub](https://github.com/roberthenderson).
