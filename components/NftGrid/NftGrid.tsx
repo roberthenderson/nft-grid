@@ -10,51 +10,19 @@ import { VirtuosoGrid } from 'react-virtuoso';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Message } from '../Message/Message';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { useMeNfts } from '@/hooks/useMeNfts';
 
 type MeNft = {
   [key: string]: string;
 };
 
 export const NftGrid = () => {
-  const setAllNfts = useSetRecoilState(allNftsAtom);
+  const { fetchNextPage, isLoading, isError } = useMeNfts();
   const searchTerm = useRecoilValue(searchTermAtom);
   const filteredNfts = useRecoilValue(queryAllNftsSelector(searchTerm));
-  const [offset, setOffset] = useState<number>(0);
-
-  const fetchNfts = useCallback(
-    async ({ pageParam: nextOffset = 0 }) => {
-      const response = await fetch(
-        GET_LISTED_NFTS_BY_COLLECTION_SYMBOL_ENDPOINT + nextOffset
-      ).then((res) => res.json());
-
-      setOffset(nextOffset);
-
-      const nfts = response.results.map((nft: MeNft) => {
-        return {
-          id: nft.id,
-          title: nft.title,
-          image: nft.img,
-          price: nft.price,
-        };
-      });
-      setAllNfts((existingNfts) => [...existingNfts, ...nfts]);
-
-      return response;
-    },
-    [setAllNfts]
-  );
-
-  const { fetchNextPage, isLoading, isError } = useInfiniteQuery({
-    queryKey: ['nfts'],
-    queryFn: fetchNfts,
-    getNextPageParam: (lastPage, pages) => {
-      return offset + lastPage.results.length;
-    },
-    retry: 10,
-  });
 
   return (
-    <div className="h-[calc(100vh-80px)] w-full mx-auto">
+    <div data-testid="nft-grid" className="h-[calc(100vh-80px)] w-full mx-auto">
       {filteredNfts.length === 0 && !isLoading && (
         <Message
           title="No NFTs found"
@@ -63,6 +31,7 @@ export const NftGrid = () => {
       )}
       {isLoading && (
         <Message
+          data-testid="loading-message"
           iconConfig={{
             iconProps: { icon: faSpinner, spin: true },
             iconColor: 'text-meLightest',
@@ -71,6 +40,7 @@ export const NftGrid = () => {
       )}
       {isError && (
         <Message
+          data-testid="error-message"
           title="Oops, something went wrong"
           subtitle="Please refresh the page."
         />
