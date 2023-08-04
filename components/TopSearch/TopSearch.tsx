@@ -10,7 +10,7 @@ import {
   FocusEventHandler,
   useState,
 } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 export const TopSearch = () => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
