@@ -8,6 +8,7 @@ import {
   ChangeEvent,
   ChangeEventHandler,
   FocusEventHandler,
+  KeyboardEventHandler,
   useState,
 } from 'react';
 import { useSetRecoilState } from 'recoil';
@@ -27,6 +28,12 @@ export const TopSearch = () => {
     250
   );
 
+  const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = (event) => {
+    if (event.key.toLowerCase() === 'escape') {
+      setSearchTerm('');
+    }
+  };
+
   return (
     <div className="top-search w-full md:w-1/2">
       <div className="relative flex items-center">
@@ -39,6 +46,7 @@ export const TopSearch = () => {
           onFocus={handleFocus}
           onBlur={handleFocus}
           onChange={handleSearch}
+          onKeyUp={handleKeyUp}
         />
         <FontAwesomeIcon
           icon={faSearch}

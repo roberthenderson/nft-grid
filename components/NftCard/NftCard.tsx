@@ -4,9 +4,9 @@ import { GridNft } from '@/app/recoil/allNftsAtom';
 import { BLUR_DATA_URL } from '@/utils/contants';
 import Image from 'next/image';
 
-interface NftCardProps {
+type NftCardProps = {
   nft: GridNft;
-}
+};
 
 export const NftCard = ({ nft }: NftCardProps) => {
   return (
