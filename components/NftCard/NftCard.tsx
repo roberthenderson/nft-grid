@@ -9,7 +9,7 @@ interface NftCardProps {
 
 export const NftCard = ({ nft }: NftCardProps) => {
   return (
-    <div className="nft-card w-full relative">
+    <div className="nft-card">
       <Image
         width={400}
         height={400}

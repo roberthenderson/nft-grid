@@ -6,6 +6,7 @@ import { allNftsAtom, queryAllNftsSelector } from '@/app/recoil/allNftsAtom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { searchTermAtom } from '@/app/recoil/searchTermAtom';
 import { GET_LISTED_NFTS_BY_COLLECTION_SYMBOL_ENDPOINT } from '@/utils/contants';
+import { VirtuosoGrid } from 'react-virtuoso';
 
 interface MeNft {
   [key: string]: string;
@@ -28,6 +29,7 @@ export const NftGrid = () => {
         price: nft.price,
       };
     });
+    console.log('nfts', nfts, filteredNfts);
     setAllNfts((existingNfts) => [...existingNfts, ...nfts]);
   }, [setAllNfts]);
 
@@ -38,10 +40,13 @@ export const NftGrid = () => {
   }, [fetchNfts, allNfts]);
 
   return (
-    <section className="nft-grid grid mt-8 mx-auto grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4 max-w-screen-xl">
-      {filteredNfts.map((nft) => (
-        <NftCard nft={nft} key={nft.id} />
-      ))}
-    </section>
+    <div className="h-[calc(100vh-80px)] w-full mx-auto">
+      <VirtuosoGrid
+        listClassName="nft-grid w-full grid mt-8 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4"
+        itemClassName="w-full relative"
+        data={filteredNfts}
+        itemContent={(index, nft) => <NftCard nft={nft} key={nft.id} />}
+      />
+    </div>
   );
 };

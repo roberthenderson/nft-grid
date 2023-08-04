@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <RecoilRoot>
       <main className="flex flex-col">
-        <header className="flex flex-col items-center w-full p-4 bg-meLighter shadow">
+        <header className="sticky top-0 z-10 flex flex-col items-center w-full h-20 p-4 bg-meLighter shadow">
           <TopSearch />
         </header>
         <NftGrid />
