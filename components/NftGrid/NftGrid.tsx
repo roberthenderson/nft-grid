@@ -1,20 +1,13 @@
 'use client';
 
-import { useCallback, useState } from 'react';
 import { NftCard } from '../NftCard/NftCard';
-import { allNftsAtom, queryAllNftsSelector } from '@/app/recoil/allNftsAtom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { queryAllNftsSelector } from '@/app/recoil/allNftsAtom';
+import { useRecoilValue } from 'recoil';
 import { searchTermAtom } from '@/app/recoil/searchTermAtom';
-import { GET_LISTED_NFTS_BY_COLLECTION_SYMBOL_ENDPOINT } from '@/utils/contants';
 import { VirtuosoGrid } from 'react-virtuoso';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { Message } from '../Message/Message';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useMeNfts } from '@/hooks/useMeNfts';
-
-type MeNft = {
-  [key: string]: string;
-};
 
 export const NftGrid = () => {
   const { fetchNextPage, isLoading, isError } = useMeNfts();
