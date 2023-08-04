@@ -41,6 +41,8 @@ I tried to keep each component as dumb as possible. Other than `TopSearch` which
 
 The API logic is abstracted into `./hooks/useMeNfts`. In order to paginate, I am incrementing the `offset` param because the `cursor` is not working for me. [This request](https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0) is the endpoint given in the project description and has a `nextCursor`. When you try to use the value (i.e. `?collectionSymbol=okay_bears&cursor=<value>`), [it responds](https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&cursor=K49rR85xPPEinifbaQjUdspDsSd5nSAciezWq3S19Nk) with "Internal Error".
 
+Also note, that the 2nd request always only returns 19 results instead of 20. This is accounted for because I'm increasing the `offset` based on the previous page's length.
+
 ### Styling
 
 [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) defaults to using [TailwindCSS](https://tailwindcss.com/). I like Tailwind's approach to styling. I've used many CSS frameworks/preprocessors/etc over the past decade, but I find using class name styling the most intuitive. Most recently, I was using Chakra UI, but I don't like how they use Props for styling.

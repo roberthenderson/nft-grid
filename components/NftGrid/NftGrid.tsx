@@ -39,7 +39,7 @@ export const NftGrid = () => {
         />
       )}
       <VirtuosoGrid
-        listClassName="nft-grid w-full grid my-6 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4"
+        listClassName="nft-grid w-full grid my-6 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 px-4"
         itemClassName="w-full relative"
         data={filteredNfts}
         itemContent={(index, nft) => <NftCard nft={nft} key={nft.id} />}
