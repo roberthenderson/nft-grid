@@ -38,6 +38,7 @@ export const TopSearch = () => {
     <div className="top-search w-full md:w-1/2">
       <div className="relative flex items-center">
         <input
+          data-testid="top-search-input"
           type="search"
           name="search"
           id="search"
@@ -49,6 +50,7 @@ export const TopSearch = () => {
           onKeyUp={handleKeyUp}
         />
         <FontAwesomeIcon
+          data-testid="top-search-icon"
           icon={faSearch}
           size={'lg'}
           className={`absolute my-auto inset-y-0 right-2 flex py-1.5 pr-1.5 self-center transition ease-in-out duration-150 ${
