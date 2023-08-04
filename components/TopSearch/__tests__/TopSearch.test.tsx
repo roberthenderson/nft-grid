@@ -16,7 +16,7 @@ describe('TopSearch', () => {
     expect(input).toBeInTheDocument();
   });
 
-  it('changes the icon to pink when focused', () => {
+  it('changes the icon to pink when focused', async () => {
     // Arrange
     const input = screen.getByTestId('top-search-input');
     const icon = screen.getByTestId('top-search-icon');
@@ -27,7 +27,7 @@ describe('TopSearch', () => {
     });
 
     // Assert
-    waitFor(() => {
+    await waitFor(() => {
       expect(icon).toHaveClass('text-meLightest');
       expect(icon).not.toHaveClass('text-gray-200');
     });

@@ -1,7 +1,7 @@
 'use client';
 
 import { GridNft } from '@/app/recoil/allNftsAtom';
-import { BLUR_DATA_URL } from '@/utils/contants';
+import { BLUR_DATA_URL } from '@/utils/constants';
 import Image from 'next/image';
 
 type NftCardProps = {
@@ -12,6 +12,7 @@ export const NftCard = ({ nft }: NftCardProps) => {
   return (
     <div className="nft-card">
       <Image
+        data-testid="nft-image"
         width={400}
         height={400}
         src={nft.image}
@@ -22,8 +23,16 @@ export const NftCard = ({ nft }: NftCardProps) => {
       />
       <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-meDarkest rounded-b-sm">
         <div className="my-auto p-2 h-10 flex">
-          <p className="nft-title shadow leading-6 text-sm">{nft.title}</p>
-          <p className="flex nft-price shadow ml-auto leading-6 text-md">
+          <p
+            data-testid="nft-title"
+            className="shadow leading-6 text-xs sm:text-sm"
+          >
+            {nft.title}
+          </p>
+          <p
+            data-testid="nft-price"
+            className="flex shadow ml-auto leading-6 text-md"
+          >
             <Image
               src={'/static/icons/solanaIcon.png'}
               width={15}

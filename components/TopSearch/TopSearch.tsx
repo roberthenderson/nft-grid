@@ -1,7 +1,7 @@
 'use client';
 
 import { searchTermAtom } from '@/app/recoil/searchTermAtom';
-import { debounce } from '@/utils/debounce/debounce';
+import { debounce } from '@/utils/debounce';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
