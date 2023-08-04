@@ -1,11 +1,14 @@
 import { allNftsAtom } from '@/app/recoil/allNftsAtom';
 import { GET_LISTED_NFTS_BY_COLLECTION_SYMBOL_ENDPOINT } from '@/utils/constants';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 type MeNft = {
-  [key: string]: string;
+  id: string;
+  title: string;
+  img: string;
+  price: number;
 };
 
 export const useMeNfts = () => {

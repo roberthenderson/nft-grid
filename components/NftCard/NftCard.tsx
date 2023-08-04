@@ -40,7 +40,7 @@ export const NftCard = ({ nft }: NftCardProps) => {
               alt="Solana Icon"
               className="w-auto h-4 my-auto mr-1 lg:mr-0.5"
             />
-            <span>{nft.price}</span>
+            <span>{nft.price.toLocaleString()}</span>
           </p>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { NftCard } from '../NftCard';
 describe('NftCard', () => {
   const title = 'NFT';
   const image = 'https://placekitten.com/200/200';
-  const price = '42.69';
+  const price = 42.69;
 
   beforeEach(() => {
     const nft = {
@@ -32,6 +32,6 @@ describe('NftCard', () => {
     expect(titleEl).toBeInTheDocument();
     expect(titleEl).toHaveTextContent(title);
     expect(priceEl).toBeInTheDocument();
-    expect(priceEl).toHaveTextContent(price);
+    expect(priceEl).toHaveTextContent(price.toLocaleString());
   });
 });

@@ -4,7 +4,7 @@ export interface GridNft {
   id: string;
   title: string;
   image: string;
-  price: string;
+  price: number;
 }
 
 export const allNftsAtom = atom<GridNft[]>({
@@ -18,6 +18,8 @@ export const queryAllNftsSelector = selectorFamily({
     (searchTerm: string) =>
     ({ get }) => {
       const allNfts = get(allNftsAtom);
-      return allNfts.filter((nft) => nft.title.includes(searchTerm));
+      return allNfts.filter((nft) =>
+        nft.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     },
 });
