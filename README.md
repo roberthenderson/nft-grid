@@ -57,8 +57,9 @@ I'm listing out the requirements and then my solutions from the project document
 2. Virtualize the grid to improve performance
    - I used [`react-virtuoso`](https://virtuoso.dev/) for virtualization. In `./components/NftGrid`, you'll see it's consumed. I chose `react-virtuoso` because it has both virtualization and infinite loading support.
    - For infinite loading, I am using `react-query`. The `useInfiniteQuery` hook allows me to pass a data fetch method (I used `fetch`) that is called whenever the user scrolls to the end of the grid and increments the API's `offset` parameter to fetch the next set of results. You can see the implementation in `./hooks/useMeNfts`, and it's consumed in `./components/NftGrid`.
-   - I used `react-query` rather than simply calling the API and concatenating subsequent responses to previous ones because it gives me free caching, and other performance optimizations for free. It also allows me to easily retry failures easily.
+   - I used `react-query` rather than simply calling the API and concatenating subsequent responses to previous ones because it gives me caching, and other performance optimizations for free. It also allows me to easily retry failures.
 3. Add a search bar that filter NFTs on client side, only the nfts match the search string should show up
+   - The search filters the grid of NFTs based on the NFT `title`. Since they are all named `Okay Bears #`, you're basically doing a number search.
    - The search is made up of a component (`./components/TopSearch`), and [Recoil](https://recoiljs.org/) state. I like Recoil because it's simple shared global state which fits my needs for powering a simple search.
    - Since the `TopSearch` component sets the search term, but the `NftGrid` components ends up rendering the filtered NFTs, Recoil fits the bill.
 4. Retry on api failure since it’s public faced and have rate limit
