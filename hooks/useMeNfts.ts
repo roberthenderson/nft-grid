@@ -43,6 +43,7 @@ export const useMeNfts = () => {
         return offset + lastPage.results.length;
       },
       retry: 10,
+      refetchOnWindowFocus: false,
     });
 
   return { fetchNextPage, isLoading, isSuccess, isError, data };
